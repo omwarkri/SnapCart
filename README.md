@@ -4,6 +4,7 @@
 SnapCart is a simple **E-commerce website** built using **Flask**, **SQLite**, and **Jinja templates**. It supports **user authentication**, **cart functionality**, and a basic product listing system.  
 
 ---
+![Snapcart Home Page](project_images/snapcart1.png)
 
 ### **📌 Features**  
 ✅ User Signup & Login Authentication  
@@ -142,4 +143,7 @@ git add README.md
 git commit -m "Added project README"
 git push origin main
 ```
+![Snapcart Home Page](project_images/snapcart2 login.png)
+![Snapcart Home Page](project_images/snapcart3homepage.png)
+![Snapcart Home Page](project_images/snapcart4cart.png)
 
