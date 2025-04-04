@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SnapCart</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a0ca3;
+            --secondary: #4cc9f0;
+            --success: #38b000;
+            --warning: #ffaa00;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --card-bg: #ffffff;
+            --border-radius: 12px;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: #f8fafc;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        h2 {
+            color: var(--dark);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+
+        .user-nav {
+            background-color: white;
+            padding: 0.75rem 1rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 1.5rem;
+            display: inline-block;
+        }
+
+        .user-nav a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            margin: 0 0.5rem;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .user-nav a:hover {
+            color: var(--primary-dark);
+        }
+
+        .user-nav a:not(:last-child)::after {
+            content: '|';
+            color: var(--gray);
+            position: absolute;
+            right: -1rem;
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background-image: linear-gradient(to right, rgba(0, 0, 0, 0), var(--primary), rgba(0, 0, 0, 0));
+            margin: 1.5rem 0;
+        }
+
+        /* Product Cards */
+        .card {
+            border: none;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            background: var(--card-bg);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .card-img-container {
+            height: 200px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f8f9fa;
+            padding: 1rem;
+        }
+
+        .card-img-top {
+            max-height: 100%;
+            max-width: 100%;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover .card-img-top {
+            transform: scale(1.05);
+        }
+
+        .card-body {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .card-title {
+            color: var(--dark);
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            font-size: 1.25rem;
+        }
+
+        .card-text {
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-text::before {
+            content: '₹';
+            font-size: 1rem;
+            margin-right: 2px;
+        }
+
+        .card-footer {
+            background: transparent;
+            border-top: none;
+            padding: 0 1.5rem 1.5rem;
+        }
+
+        .btn {
+            font-weight: 600;
+            border-radius: var(--border-radius);
+            padding: 0.6rem 1.25rem;
+            transition: all 0.3s;
+            box-shadow: var(--shadow);
+            border: none;
+            width: 100%;
+        }
+
+        .btn-success {
+            background-color: var(--success);
+        }
+
+        .btn-success:hover {
+            background-color: #2b8a00;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .btn-warning {
+            background-color: var(--warning);
+            color: var(--dark);
+        }
+
+        .btn-warning:hover {
+            background-color: #e69500;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        /* Cart Icon Animation */
+        h2 .animate-icon {
+            display: inline-block;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .card {
+                margin-bottom: 1.5rem;
+            }
+            
+            .user-nav {
+                display: block;
+                text-align: center;
+                padding: 1rem;
+            }
+            
+            .user-nav a:not(:last-child)::after {
+                display: none;
+            }
+            
+            .user-nav a {
+                display: block;
+                margin: 0.5rem 0;
+            }
+            
+            .card-img-container {
+                height: 150px;
+            }
+        }
+
+        /* Loading Animation */
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .loading {
+            animation: pulse 1.5s infinite;
+        }
+    </style>
+</head>
+<body class="container mt-4">
+    <h2 class="animate__animated animate__fadeIn">Welcome to SnapCart <span class="animate-icon">🛒</span></h2>
+    
+    {% if session.user %}
+        <div class="user-nav animate__animated animate__fadeIn">
+            Logged in as <strong>{{ session.user }}</strong> 
+            <a href="/logout">Logout</a>
+            <a href="/cart">View Cart</a>
+        </div>
+    {% else %}
+        <div class="user-nav animate__animated animate__fadeIn">
+            <a href="/login">Login</a>
+            <a href="/signup">Signup</a>
+        </div>
+    {% endif %}
+    
+    <hr class="animate__animated animate__fadeIn">
+
+    <div class="row">
+        {% for product in products %}
+        <div class="col-md-4 animate__animated animate__fadeInUp">
+            <div class="card mb-4">
+                <div class="card-img-container">
+                    <img src="{{ product.url }}" class="card-img-top" alt="{{ product.name }}">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.name }}</h5>
+                    <p class="card-text">{{ product.price }}</p>
+                </div>
+                <div class="card-footer">
+                    {% if session.user %}
+                        <a href="/add_to_cart/{{ product.id }}" class="btn btn-success">Add to Cart</a>
+                    {% else %}
+                        <a href="/login" class="btn btn-warning">Login to Buy</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <script>
+        // Add staggered animation to product cards
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.animate__fadeInUp');
+            cards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.1}s`;
+            });
+        });
+    </script>
+</body>
+</html>
